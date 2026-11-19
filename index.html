@@ -64,9 +64,13 @@
     .btn:disabled { opacity:.48; cursor:default; }
     .icon { width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none; }
     .btn-primary { width:100%; min-height:40px; margin-top:.8rem; }
-    .qr-stage { background:var(--ground); border-radius:3px; display:grid; place-items:center; width:100%; height:clamp(240px,30vw,340px); overflow:hidden; padding:12px; }
-    #qr-mount { min-width:0; width:100%; height:100%; display:grid; place-items:center; }
-    #qr-mount canvas,#qr-mount > svg { display:block; width:100%; height:100%; min-height:0; object-fit:contain; max-height:316px; }
+    .card-body .site-select, details .site-select { width:100%; }
+    #qr-type, #qr-type-control { margin-bottom:14px; }
+    .qr-stage { background:var(--ground); border-radius:3px; width:100%; height:clamp(240px,30vw,340px); padding:12px; }
+    #qr-mount { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    #qr-mount > :is(canvas,svg) { display:block; width:auto; height:auto; max-width:100%; max-height:100%; }
+    footer { margin-top:2rem; border-top:1px solid var(--line); padding-top:.8rem; color:var(--muted); font-size:.8rem; }
+    footer a { color:var(--link); text-underline-offset:.15em; }
     .qr-empty { text-align:center; color:var(--muted); font-size:.88rem; }
     .qr-empty .icon { width:32px; height:32px; margin-bottom:.45rem; color:#78716c; }
     .export-row { display:grid; grid-template-columns:minmax(0,1fr) 5.6rem; gap:.6rem; margin-top:.85rem; }
@@ -76,11 +80,13 @@
       .wrap { padding:1.2rem .85rem 2rem; } header.site { padding-bottom:.85rem; } header nav { gap:1rem; }
       h1 { font-size:1.7rem; margin:1rem 0; }
       main { grid-template-columns:minmax(0,1fr); grid-template-areas:"content" "preview" "settings"; gap:.75rem; }
-      .preview-col { position:static; } .qr-stage { aspect-ratio:auto; height:210px; } #qr-mount canvas,#qr-mount > svg { max-width:185px; max-height:185px; }
+      .preview-col { position:static; } .qr-stage { height:210px; }
       .card-head { padding:.8rem .9rem .1rem; } .card-body { padding:.6rem .9rem .85rem; } summary { padding:.65rem .9rem; }
     }
     @media(max-width:400px) { .g2 { grid-template-columns:1fr; } }
   </style>
+  <link rel="stylesheet" href="https://sambarbeau.com/ui/select.css" />
+  <script defer src="https://sambarbeau.com/ui/select.js"></script>
 </head>
 <body>
 
@@ -101,7 +107,7 @@
       <div class="card-head"><h2>Content</h2><button class="btn btn-icon" onclick="clearContent()"><svg class="icon" aria-hidden="true"><use href="#i-clear"></use></svg>Clear</button></div>
       <div class="card-body">
         <label class="lbl" for="qr-type">Type</label>
-        <select id="qr-type" class="text-input" onchange="renderTypeFields()" style="margin-bottom:14px">
+        <select id="qr-type" class="text-input" onchange="renderTypeFields()">
           <option value="url">Website</option>
           <option value="text">Plain text</option>
           <option value="email">Email</option>
@@ -355,6 +361,7 @@
   </div><!-- /preview-col -->
 
 </main>
+<footer>Built with <a href="https://github.com/kozakdenys/qr-code-styling">qr-code-styling</a></footer>
 </div>
 
 <script>
